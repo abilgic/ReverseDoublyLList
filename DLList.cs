@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Versioning;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -47,8 +48,24 @@ namespace ReverseDoublyLList
             newnode.Prev = current;
             newnode.Next = null;
 
+        }
+        public void ReverseList()
+        {
+            if (head == null)
+                return;
+
+            Node current = head;
+            Node temp = null;
 
 
+            while (current != null)
+            {
+                temp = current.Prev;
+                current.Prev = current.Next;
+                current.Next = temp;
+                current = current.Prev;
+            }
+            head = temp.Prev;
         }
 
         public void Print()
@@ -56,7 +73,7 @@ namespace ReverseDoublyLList
             if (head == null)
                 return;
             var current = head;
-            while (current.Next != null)
+            while (current != null)
             {
                 Console.Write($"{current.Data} ");
                 current = current.Next;
